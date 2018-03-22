@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/mainShell.zul"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?link rel="stylesheet" type="text/css" href="/resources/css/qsys.css"?>
+
+
+<zk  xmlns="http://www.zkoss.org/2005/zul">
+    
+    
+    <vbox width="100%" height="100%" style="border:0px solid black;" align="center" pack="center" self="@{define(main_window_data)}">
+        <zscript><![CDATA[    ru.apertum.qsystem.prereg.Client client = (ru.apertum.qsystem.prereg.Client) org.zkoss.zk.ui.Sessions.getCurrent().getAttribute("DATA");   ]]>
+        </zscript>
+        <vbox width="700px">
+            <hbox>
+                <label sclass="name_label3" value= "${c:l('number')}"/>
+                <label sclass="name_label3" value= "${client.advClient.id}"/>
+            </hbox>
+            <hbox>
+                <label sclass="name_label" value= "${client.name}"/>
+                <label sclass="name_label" value= "${client.sourname}"/>
+                <label sclass="name_label" value= "${client.middlename}"/>
+            </hbox>
+            <label sclass="name_label" value= "${client.email}"/>
+            <label sclass="name_label2" value= " "/>
+            <hbox>
+                <label sclass="name_label2" value= "${c:l('selected_service')}"/>
+                <label sclass="name_label2" value= "${client.service}"/>
+            </hbox>
+            <hbox>
+                <label sclass="name_label2" value= "${client.service.input_caption}"/>
+                <label sclass="name_label2" value= "${client.inputData}"/>
+            </hbox>
+            <label sclass="labelstyle" value= " "/>
+            <hbox>
+                <label sclass="name_label3" value= "${c:l('selected_time')}"/>
+                <label sclass="name_label3" value= " ${client.day} "/>
+                <label sclass="name_label3" value= " ${c:l('to')} "/>
+                <label sclass="name_label3" value= "  ${client.finishT}"/>
+            </hbox>
+            <!--hbox>
+                <label sclass="labelstyle" value= "Время записи: "/>
+                <!-label sclass="labelstyle" value="${client.day} с ${client.startT} до ${client.finishT}"/->
+                <label sclass="labelstyle" value="${client.day} к ${client.finishT}"/>
+            </hbox-->
+            <label sclass="notice5" visible="${client.service.preInfoHtml!=null and ''!=client.service.preInfoHtml}" value="${c:l('info')}"/>
+            <html><![CDATA[${client.service.preInfoHtml}]]>
+            </html>
+        </vbox>
+        
+        
+        
+        <hbox pack="center">
+            <zscript language="java">
+                void printBrowser(){
+                Clients.print();
+                }
+            </zscript>
+            <button label="${c:l('print')}" width="100px" height="30px" onClick="java:printBrowser()" />
+        </hbox>
+    </vbox>
+
+</zk>

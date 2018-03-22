@@ -1,0 +1,27 @@
+kieli
+Ennakkoilmoittautuminen
+Henkilötiedot
+täyttää
+Sukunimi *
+Nimi *
+toinen nimi
+E-mail
+Kirjoita kirjaimet kuva
+takaisin
+seuraava
+virkistää
+Aloita Esirekisteröintimenettelyn Täytä alla oleva lomake. Kentät on merkitty tähdellä (*) ovat pakollisia. Jos määrität sähköpostin, sitten tähän osoitteeseen automaattisesti lähettää postitse uuden tapaamisen tiedot.
+Virheellinen sähköpostiosoite!
+Täsmää!
+Määritä toinen nimi!
+Määritä nimi!
+Määritä sukunimi!
+Valitse palvelu, johon haluat saada:
+Palvelu on valittu:
+Valitse päivämäärä ja aika vierailu:
+painatus
+Tiedot:
+Nimittäminen aika:
+Rekisterinumero:
+kohteeseen
+Jotain oli rikki. Yritä uudelleen vähän myöhemmin.

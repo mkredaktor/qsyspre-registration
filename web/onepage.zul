@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?link rel="stylesheet" type="text/css" href="/resources/css/qsys.css"?>
+<?script type="text/javascript" src="/resources/js/PrintDiv.js"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul">
+    
+    <div apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('ru.apertum.qsystem.prereg.OneForm')" validationMessages="@id('vmsgs')"
+         form="@id('fx') @load(vm.client) @save(vm.client, before='submit') @validator('ru.apertum.qsystem.prereg.ClientOneFormValidator', captcha=vm.captcha, captchaInput=vm.captchaInput)">
+        
+        
+            
+        <vlayout>
+            <label value="${c:l('notice2')}" sclass="name_label_one1"/>
+                
+            <bandbox id="bd_redirect" onChanging="@command('changeService')" readonly="true" autodrop="true" hflex="true" style="margin: 0px 10px 0px 0px;">  
+                <bandpopup>
+                    <groupbox id="TreeTest">
+                        <caption label="${c:l('services')}" />
+                        <tree id="tree_redirect_service_choose"  zclass="z-dottree" style="white-space:nowrap;"
+                              vflex="true"
+                              onSelect="bd_redirect.value=self.selectedItem.label; bd_redirect.close();"
+                              selectedItem="@bind(vm.pickedRedirectServ)"
+                              model="@load(vm.treeServs)">
+                            <treecols>
+                                <treecol hflex="1" label="${c:l('tree_of_services')}" />
+                            </treecols>
+                            <template name="model">
+                                <treeitem>
+                                    <treerow>
+                                        <treecell label="@load(each)"/>
+                                    </treerow>
+                                </treeitem>
+                            </template>
+                        </tree>
+                    </groupbox>
+                </bandpopup>
+            </bandbox>
+                    
+     
+         
+         
+         
+         
+            <div id="req_info" visible="@load(vm.preInfoHtmtRequired)" style="margin: 10px 0px 0px 0px;">
+                <label sclass="name_label_one1" value="${c:l('info')}"/>
+                <html content="@load(vm.pickedRedirectServ.preInfoHtml)">
+                </html>
+            </div>
+            
+            <vbox id="inputData" visible="@load(vm.inputDataRequired)" hflex="true" width="100%" style="margin: 10px 10px 0px 0px;">
+                <label sclass="name_label_one1" value="@load(vm.pickedRedirectServ.input_caption)"/>
+                <textbox value="@bind(vm.inputData)" hflex="true" width="100%" tabindex="10" />
+                <label class="error" value="@load(vm.input_data_required)" />
+            </vbox>
+                   
+                
+                
+                
+         
+
+            <div visible="@load(vm.picked)">
+                <div  style="margin: 10px 0px 0px 0px;">
+                    <label id="lbl" sclass="name_label_one1" value="${c:l('select_time')}"/>
+                    <label class="error" value="@load(vm.date_time_required)" />
+                </div>
+                <hbox>
+                    <calendar id="cal" value="@bind(vm.date)" onChange="@command('changeDate')" />
+                    <combobox id="cbTime" readonly="true" width="100px" model="@load(vm.timeList)" 
+                              vflex="1"
+                              selectedItem="@bind(vm.selectedDate)" onCreate="">
+                        <template name="model">
+                            <comboitem label="@load(each) @converter('formatedDate',format='HH:mm')"  />
+                        </template>
+                    </combobox>
+                </hbox>
+            
+                <vbox style="margin: 10px 0px 0px 0px;">
+                    <label sclass="name_label_one1" value="${c:l('captcha')}"/>
+                
+                    <hbox align="center" pack="center">
+                        <textbox value="@bind(vm.captchaInput)" width="60px"  tabindex="12" />
+                        <captcha width="200px" height="30px" bgColor="@load(vm.backgroundColour)"
+                                 fontColor="@load(vm.foregroundColour)" value="@load(vm.captcha)" frame="true" />
+                        <button label="${c:l('refresh')}" onClick="@command('regenerate')" />
+                    </hbox>
+                    <label class="error" value="@load(vmsgs['captcha'])" />
+                </vbox>
+            
+                <button label="${c:l('get_advance')}" width="200px" height="35px" onClick="@command('submit')"  style="margin: 10px 0px 0px 0px;"/>
+            </div>
+            
+            
+            
+            
+            
+            
+            
+            <vbox visible="@load(vm.done)" id="finish" style="padding: 10px 10px 10px 10px; background:#B0E7A0;">
+                <hbox>
+                    <label sclass="name_label_one2" value= "${c:l('number')}"/>
+                    <label sclass="name_label_one2" value= "@load(vm.client.advClient.id)"/>
+                </hbox>
+                <hbox>
+                    <label sclass="name_label_one2" value= "${c:l('selected_time')}"/>
+                    <label sclass="name_label_one2" value= " @load(vm.client.day) "/>
+                    <label sclass="name_label_one2" value= " ${c:l('to')} "/>
+                    <label sclass="name_label_one2" value= "  @load(vm.client.finishT)"/>
+                </hbox>
+                
+                <hbox align="center" pack="center">
+                    <label value="${c:l('email')}:" sclass="name_label_one2"/>
+                    <textbox width="220px" value="@save(vm.client.email, before='sendMail')"  tabindex="9" />
+                    <button label="@load(vm.mailResult)" onClick="@command('sendMail')"/>
+                </hbox>
+                <hbox pack="center">
+                    <zscript language="java">
+                        void printBrowser(){
+                        Clients.print();
+                        }
+                    </zscript>
+                    <button label="${c:l('print')}" onClick="java:printBrowser()" />
+                </hbox>
+            </vbox>
+            
+            <vbox visible="@load(vm.fail)" id="failure" style="padding: 10px 10px 10px 10px; background:#DDDDDD;">
+                <label sclass="error" value= "${c:l('error')}"/>
+            </vbox>
+                
+        
+                
+      
+        
+                    
+        </vlayout>
+           
+        
+        
+        
+        
+        
+        
+        
+      
+    </div>                 
+
+        
+    
+</zk>

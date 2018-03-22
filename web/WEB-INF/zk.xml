@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk>
+    <!--
+        <system-config>
+            <disable-event-thread/>
+        </system-config>
+     -->
+    <client-config>
+        <debug-js>true</debug-js>
+    </client-config>
+
+    <listener>
+        <description>ThreadLocal Synchronization Listener
+        </description>
+        <listener-class>org.zkoss.zkplus.util.ThreadLocalListener
+        </listener-class>
+    </listener>
+    <preference>
+        <name>ThreadLocal</name>
+        <value>
+            org.springframework.security.context.ThreadLocalSecurityContextHolderStrategy=contextHolder
+        </value>
+    </preference>
+    <!-- This is disabled here so user can change language in browser and refresh to get correct locale -->
+    <library-property>
+         <name>org.zkoss.web.preferred.locale</name>
+         <value>uk</value>
+    </library-property>
+
+
+</zk>

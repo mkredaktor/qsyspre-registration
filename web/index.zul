@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/mainShell.zul"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?link rel="stylesheet" type="text/css" href="/resources/css/qsys.css"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul">
+        
+    <vbox width="100%" height="100%" style="border:0px solid black;" align="center" pack="center" self="@{define(main_window_data)}">
+        
+        <div sclass="box_notice1">
+            <label id="lbl"  sclass="notice1" value="${c:l('notice1')}"/>
+        </div>
+        
+        <div apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('ru.apertum.qsystem.prereg.ClientForm')" validationMessages="@id('vmsgs')"
+             form="@id('fx') @load(vm.client) @save(vm.client, before='submit') @validator('ru.apertum.qsystem.prereg.ClientFormValidator', captcha=vm.captcha, captchaInput=vm.captchaInput)">
+            <grid width="70%" height="360px">
+                <columns>
+                    <column label="${c:l('client_data')}" width="30%" />
+                    <column label="${c:l('fill_out')}" width="70%"/>
+                    
+                </columns>
+				
+                <rows>
+                    <row align="left">
+                        <label value="${c:l('name')}" width="150px" />
+                        <hlayout>
+                            <textbox value="@bind(fx.name)" width="200px" tabindex="1" />
+                            <label class="error" value="@load(vmsgs['name'])" />
+                        </hlayout>
+                        
+                    </row>
+                    
+                    <row align="left">
+                        <label value="${c:l('surname')}" width="150px" />
+                        <hlayout>
+                            <textbox value="@bind(fx.sourname)" width="200px" tabindex="1" />
+                            <label class="error" value="@load(vmsgs['sourname'])" />
+                        </hlayout>
+                        
+                    </row>
+                    
+                    <row align="left">
+                        <label value="${c:l('third_name')}" width="150px" />
+                        <hlayout>
+                            <textbox value="@bind(fx.middlename)" width="200px" tabindex="1" />
+                            <label class="error" value="@load(vmsgs['middlename'])" />
+                        </hlayout>
+                        
+                    </row>
+                    
+                    
+                    <row align="left">
+                        ${c:l('email')}:
+                        <cell>
+                            <textbox width="200px" value="@bind(fx.email)"  tabindex="9" />
+                            <label class="error" value="@load(vmsgs['email'])" />
+                        </cell>
+                        
+ 
+                    </row>
+                  
+                    <row align="left">
+                        ${c:l('captcha')}:
+                            <vlayout>
+                                <hlayout>
+                                    <textbox value="@bind(vm.captchaInput)" width="200px"  tabindex="12" />
+                                    <label class="error" value="@load(vmsgs['captcha'])" />
+                                </hlayout>
+                                <hlayout>
+                                    <captcha width="200px" height="50px" bgColor="@load(vm.backgroundColour)"
+                                         fontColor="@load(vm.foregroundColour)" value="@load(vm.captcha)"
+                                         frame="true" />
+                                    <vlayout>
+                                        <button label="${c:l('refresh')}" onClick="@command('regenerate')" width="100px" />
+                                    
+                                    </vlayout>
+                                </hlayout>
+                            </vlayout>
+                       
+                    </row>
+                    <row>
+                        <cell colspan="2" style="text-align:center">
+                            <vlayout>
+                                <!--label visible="@load(empty vmsgs)" value="@load(empty vmsgs ? 'Форма заполнена корректно!' : '', before='submit')" /-->
+                                <button label="${c:l('next')}" width="100px" height="30px" onClick="@command('submit')" />
+                            </vlayout>
+                        </cell>
+                    </row>
+                </rows>
+            </grid>
+        </div>                 
+        
+        
+    </vbox>
+        
+    
+</zk>

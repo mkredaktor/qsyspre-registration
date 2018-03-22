@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/mainShell.zul"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<?link rel="stylesheet" type="text/css" href="/resources/css/qsys.css"?>
+
+<zk xmlns="http://www.zkoss.org/2005/zul">
+        
+    <vbox width="100%" height="100%" style="border:0px solid black;" align="center" pack="center" self="@{define(main_window_data)}">
+        <div apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('ru.apertum.qsystem.prereg.ServiceForm')">
+       
+            <vbox>
+                <hbox>
+                    <label sclass="name_label" value= "@bind(vm.client.name)"/>
+                    <label sclass="name_label" value= "@bind(vm.client.middlename)"/>
+                    <label sclass="name_label" value= "@bind(vm.client.sourname)"/>
+                    <label sclass="name_label" value= "   "/>
+                    <label sclass="name_label" value= "@bind(vm.client.email)"/>
+                </hbox>
+                
+                <label sclass="notice2" value= " "/>
+                <label sclass="notice2" value= "${c:l('notice2')}"/>
+            </vbox>
+       
+        
+            <!-- zscript><![CDATA[    List items = ru.apertum.qsystem.prereg.core.ServiceList.getInstance().getServiceList(); //a big list of Integer   ]]>
+            </zscript -->
+            <listbox id="listbox" mold="paging" pageSize="11" multiple="false" checkmark="true"  vflex="1" height="360px"
+                     model="@load(vm.serviceList)" selectedItem="@bind(vm.selectedService)"  onCreate="">
+                <attribute name="onCreate"><![CDATA[listbox.pagingChild.mold = "os".equals(listbox.pagingChild.mold) ? "default" : "os";]]>
+                </attribute>
+                <listhead>
+                    <listheader width="60px"/>
+                    <listheader/>
+                </listhead>
+                <!-- listitem forEach="${items}">
+                    <listcell image="/resources/img/Check.png"/>
+                    <listcell label="${each}" />
+                </listitem -->
+                <template name="model" var="service">
+                    <listitem>
+                        <listcell image="/resources/img/Check.png" />
+                        <listcell label="@load(service.name)" />
+                    </listitem>
+                </template>
+            </listbox>
+            <!--label id="full_caption" sclass="labelstyle" value="@load(vm.selectedService)"/-->
+            <hbox pack="center">
+                <button label="${c:l('back')}" width="100px" height="30px" onClick="@command('back')" />
+                <button label="${c:l('next')}" width="100px" height="30px" onClick="@command('submit')" />
+            </hbox>
+        </div>
+    </vbox>
+
+</zk>

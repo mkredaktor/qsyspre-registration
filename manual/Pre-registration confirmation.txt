@@ -1,0 +1,15 @@
+Hi ${sourname} ${name} ${meddlename}
+
+Your service is "${service}".
+
+Your number is "${number}".
+
+Come to ${date} at ${time}.
+
+${input_caption}: ${input_data}.
+
+Read this: ${info_text}
+
+Bye!
+
+Do not resend or reply.

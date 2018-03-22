@@ -1,0 +1,111 @@
+/* 
+    Document   : qsys
+    Created on : Jul 14, 2012, 4:33:27 PM
+    Author     : Evgeniy Egorov
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+.hightlight { 
+    color: #1469AB;
+    font-weight: bold; 
+} 
+
+
+.error {
+    color: red;
+}
+
+
+.header {
+    font-weight: normal;
+    font-size: 16pt;
+    font-family: 'Verdana';
+    color: darkblue;
+}
+
+.notice1{
+    font-weight: normal;
+    font-size: 12pt;
+    font-family: 'Verdana';
+    color: darkblue;
+}
+
+.box_notice1{
+    margin: 0px 50px 20px 50px;
+    text-align: justify;
+}
+
+.notice2{
+    font-weight: normal;
+    font-size: 12pt;
+    font-family: 'Verdana';
+    color: darkblue;
+}
+
+.notice3{
+    font-weight: normal;
+    font-size: 12pt;
+    font-family: 'Verdana';
+    color: darkblue;
+}
+
+.notice4{
+    font-weight: normal;
+    font-size: 12pt;
+    font-family: 'Verdana';
+    color: darkblue;
+}
+
+.notice5{
+    font-weight: normal;
+    font-size: 8pt;
+    font-family: 'Verdana';
+    color: darkblue;
+}
+
+.name_label{
+    font-weight: normal;
+    font-style: italic;
+    font-size: 12pt;
+    font-family: 'Verdana';
+    color: darkblue;
+}
+
+.name_label2{
+    font-weight: normal;
+    font-size: 10pt;
+    font-family: 'Verdana';
+    color: darkblue;
+}
+
+.name_label3{
+    font-weight: normal;
+    font-size: 10pt;
+    font-family: 'Verdana';
+    color: darkblue;
+}
+
+.name_label_one1{
+    font-weight: normal;
+    font-size: 10pt;
+    font-family: 'Verdana';
+    color: indigo;
+}
+
+.name_label_one2{
+    font-weight: normal;
+    font-size: 10pt;
+    font-family: 'Verdana';
+    color:  indigo;
+}
+
+.error_message {
+    font-weight: normal;
+    font-size: 12pt;
+    font-family: 'Verdana';
+    color: darkblue;
+}
+
+
+
